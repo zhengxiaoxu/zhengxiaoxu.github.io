@@ -292,8 +292,8 @@ mathjax:
 
 # Disqus
 disqus:
-  enable: true
-  shortname: Simon
+  enable: false
+  shortname: ShortName
   count: true
 
 # Hypercomments
