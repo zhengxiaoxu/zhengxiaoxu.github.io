@@ -146,7 +146,7 @@ social_icons:
   enable: true
   # Icon Mappings.
   # KeyMapsToSocialItemKey: NameOfTheIconFromFontAwesome
-  GitHub: github
+  Github: github
   # Twitter: twitter
   # Weibo: weibo
 
@@ -535,6 +535,3 @@ images: images
 
 # Theme version
 version: 5.1.0
-
-include:
-  - .nojekyll
