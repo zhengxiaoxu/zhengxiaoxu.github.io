@@ -87,21 +87,21 @@
 
 
 
-<meta name="description" content="继上一篇学习了如何使用NDK编译FFMPEG后，接下来就是要学习如何在Android Studio中使用了。 经过参考和一系列的摸索，记录下具体步骤。 创建C++ Support的Android Studio工程 创建C++ Support的Android Studio工程，记得勾选，其他默认下一步就好   默认创建的项目会自动创建一个native-lib.cpp的文件，这个文件后面会编译成对应的">
+<meta name="description" content="继上一篇学习了如何使用NDK编译FFMPEG后，接下来就是要学习如何在Android Studio中使用了。 经过参考和一系列的摸索，记录下具体步骤。">
 <meta name="keywords" content="Android,NDK">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android Studio NDK编程初探">
 <meta property="og:url" content="http://yoursite.com/2017/12/20/Android-Studio-NDK编程初探/index.html">
 <meta property="og:site_name" content="Simon's Note">
-<meta property="og:description" content="继上一篇学习了如何使用NDK编译FFMPEG后，接下来就是要学习如何在Android Studio中使用了。 经过参考和一系列的摸索，记录下具体步骤。 创建C++ Support的Android Studio工程 创建C++ Support的Android Studio工程，记得勾选，其他默认下一步就好   默认创建的项目会自动创建一个native-lib.cpp的文件，这个文件后面会编译成对应的">
+<meta property="og:description" content="继上一篇学习了如何使用NDK编译FFMPEG后，接下来就是要学习如何在Android Studio中使用了。 经过参考和一系列的摸索，记录下具体步骤。">
 <meta property="og:image" content="http://yoursite.com/2017/12/20/Android-Studio-NDK编程初探/chuangjiantu.jpg">
 <meta property="og:image" content="http://yoursite.com/2017/12/20/Android-Studio-NDK编程初探/tishi.jpg">
 <meta property="og:image" content="http://yoursite.com/2017/12/20/Android-Studio-NDK编程初探/cppo.jpg">
 <meta property="og:image" content="http://yoursite.com/2017/12/20/Android-Studio-NDK编程初探/screenshot.png">
-<meta property="og:updated_time" content="2017-12-20T15:27:25.000Z">
+<meta property="og:updated_time" content="2017-12-20T15:32:38.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android Studio NDK编程初探">
-<meta name="twitter:description" content="继上一篇学习了如何使用NDK编译FFMPEG后，接下来就是要学习如何在Android Studio中使用了。 经过参考和一系列的摸索，记录下具体步骤。 创建C++ Support的Android Studio工程 创建C++ Support的Android Studio工程，记得勾选，其他默认下一步就好   默认创建的项目会自动创建一个native-lib.cpp的文件，这个文件后面会编译成对应的">
+<meta name="twitter:description" content="继上一篇学习了如何使用NDK编译FFMPEG后，接下来就是要学习如何在Android Studio中使用了。 经过参考和一系列的摸索，记录下具体步骤。">
 <meta name="twitter:image" content="http://yoursite.com/2017/12/20/Android-Studio-NDK编程初探/chuangjiantu.jpg">
 
 
@@ -384,6 +384,7 @@
       
         <p>继上一篇学习了如何使用NDK编译FFMPEG后，接下来就是要学习如何在Android Studio中使用了。</p>
 <p>经过参考和一系列的摸索，记录下具体步骤。</p>
+<a id="more"></a>
 <h2 id="创建C-Support的Android-Studio工程"><a href="#创建C-Support的Android-Studio工程" class="headerlink" title="创建C++ Support的Android Studio工程"></a>创建C++ Support的Android Studio工程</h2><ol>
 <li><p>创建C++ Support的Android Studio工程，记得勾选，其他默认下一步就好</p>
 <p><img src="/2017/12/20/Android-Studio-NDK编程初探/chuangjiantu.jpg" alt="chuangjiantu"></p>
@@ -392,7 +393,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">native</span> String <span class="title">stringFromJNI</span><span class="params">()</span></span>;</div></pre></td></tr></table></figure>
 </li>
 <li><p>打开native-lib.cpp文件，可以看到里面含有一个native方法。方法的命名格式<code>Java_包名_类名_方法名</code>中间的点分号改为下划线。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;jni.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></div><div class="line"></div><div class="line"><span class="keyword">extern</span> <span class="string">"C"</span></div><div class="line"><span class="function">JNIEXPORT jstring</span></div><div class="line"></div><div class="line">JNICALL</div><div class="line"><span class="title">Java_com_example_simonzheng_ndktest_MainActivity_stringFromJNI</span><span class="params">(</span></div><div class="line">        JNIEnv *env,</div><div class="line">        jobject <span class="comment">/* this */</span>) &#123;</div><div class="line">    <span class="built_in">std</span>::<span class="built_in">string</span> hello = <span class="string">"Hello from C++"</span>;</div><div class="line">    <span class="keyword">return</span> env-&gt;NewStringUTF(hello.c_str());</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;jni.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></div><div class="line"><span class="keyword">extern</span> <span class="string">"C"</span></div><div class="line"><span class="function">JNIEXPORT jstring</span></div><div class="line">JNICALL</div><div class="line"><span class="title">Java_com_example_simonzheng_ndktest_MainActivity_stringFromJNI</span><span class="params">(</span></div><div class="line">        JNIEnv *env,</div><div class="line">        jobject <span class="comment">/* this */</span>) &#123;</div><div class="line">    <span class="built_in">std</span>::<span class="built_in">string</span> hello = <span class="string">"Hello from C++"</span>;</div><div class="line">    <span class="keyword">return</span> env-&gt;NewStringUTF(hello.c_str());</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 <li><p>编译运行默认的项目程序，这里假如之前没有按照NDK环境的话，Gradle会报错。只需要按照上一篇的步骤在sdk中下载好NDK所需的依赖环境即可。运行成功后可以在模拟器中看到默认的App，显示”Hello from C++”。</p>
 </li>
@@ -407,7 +408,7 @@
 <p>  可以选择直接在默认的native-lib.cpp文件中创建，或者自己创建新的cpp文件。这里选择了自己创建新文件。</p>
 </li>
 <li><p>创建一个叫mytest-lib.cpp的文件，并实现方法，这里注意方法的命名规则：</p>
-  <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;jni.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">extern</span> <span class="string">"C"</span></div><div class="line"><span class="function">JNIEXPORT jstring JNICALL</span></div><div class="line"><span class="title">Java_com_example_simonzheng_ndktest_MainActivity_myTest2</span><span class="params">(JNIEnv *env, jobject instance)</span> &#123;</div><div class="line"></div><div class="line">    <span class="comment">// TODO</span></div><div class="line">    <span class="built_in">std</span>::<span class="built_in">string</span> myTest = <span class="string">"Hello My Test Library!"</span>;</div><div class="line"></div><div class="line">    <span class="keyword">return</span> env-&gt;NewStringUTF(myTest.c_str());</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+  <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;jni.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></div><div class="line"></div><div class="line"><span class="keyword">extern</span> <span class="string">"C"</span></div><div class="line"><span class="function">JNIEXPORT jstring JNICALL</span></div><div class="line"><span class="title">Java_com_example_simonzheng_ndktest_MainActivity_myTest2</span><span class="params">(JNIEnv *env, jobject instance)</span> &#123;</div><div class="line">    </div><div class="line">    <span class="comment">// TODO</span></div><div class="line">    <span class="built_in">std</span>::<span class="built_in">string</span> myTest = <span class="string">"Hello My Test Library!"</span>;</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> env-&gt;NewStringUTF(myTest.c_str());</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 <li><p>然后编译项目会发现，对应的会生成mytest-lib.cpp.o文件</p>
 <p>  <img src="/2017/12/20/Android-Studio-NDK编程初探/cppo.jpg" alt="cppo"></p>
